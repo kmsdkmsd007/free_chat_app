@@ -1,0 +1,1 @@
+ C:\\Users\\HP\\Desktop\\figma\ for\ chat\ app\\chat_app\\.dart_tool\\flutter_build\\417fc9d8ce5505db02ae1b0d140bdddd\\native_assets.yaml: 
