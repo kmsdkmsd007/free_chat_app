@@ -13,6 +13,8 @@ class SplashCubitCubit extends Cubit<SplashCubitState> {
     await Future.delayed(
         const Duration(seconds: 2)); // Add a small delay for splash screen
     await Supabase.instance.client.auth.onAuthStateChange.listen((userState) {
+      print(userState.session == null);
+
       if (userState.session == null) {
         navigatorKey.currentState!.pushReplacementNamed(Routes.login);
       } else {

@@ -1,3 +1,5 @@
+import 'package:chat_app/features/home_screen.dart/home/home_cubit.dart';
+import 'package:chat_app/features/login_screen/login/login_bloc.dart';
 import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
 import 'package:chat_app/features/splash/splash_screen.dart';
 import 'package:chat_app/ui/welcome_screen.dart';
@@ -17,6 +19,8 @@ void main() async {
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<SplashCubitCubit>(create: (context) => SplashCubitCubit()),
+      BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
+      BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
     ],
     child: MyApp(),
   ));
