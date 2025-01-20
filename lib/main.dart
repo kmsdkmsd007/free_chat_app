@@ -1,7 +1,12 @@
+import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
+import 'package:chat_app/features/splash/splash_screen.dart';
 import 'package:chat_app/ui/welcome_screen.dart';
+import 'package:chat_app/utils/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
@@ -9,7 +14,12 @@ void main() async {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtmZGtzeGRlYXRodHF2bGpodWx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY3NTA0MzgsImV4cCI6MjA1MjMyNjQzOH0.85vHOAhdARopt1RdZyg8AHzNY12vcBZoj1l20d722mQ',
     url: 'https://kfdksxdeathtqvljhulx.supabase.co',
   );
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<SplashCubitCubit>(create: (context) => SplashCubitCubit()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,8 +28,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      home: WellcomeScreen(),
+      onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: Routes.splash, // Change
     );
   }
 }

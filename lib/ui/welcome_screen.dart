@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 
 class WellcomeScreen extends StatefulWidget {
   WellcomeScreen({super.key});
-  final emailContrioller = TextEditingController();
-  final passwardContrioller = TextEditingController();
 
   @override
   State<WellcomeScreen> createState() => _WellcomeScreenState();
