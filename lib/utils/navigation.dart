@@ -1,7 +1,7 @@
 import 'package:chat_app/features/home_screen.dart/home_screen.dart';
 import 'package:chat_app/features/splash/splash_screen.dart';
 import 'package:chat_app/features/login_screen/login_screen.dart';
-import 'package:chat_app/ui/singup_screen.dart';
+import 'package:chat_app/features/singup/singup_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {

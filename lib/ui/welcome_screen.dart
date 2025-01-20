@@ -1,5 +1,5 @@
 import 'package:chat_app/features/login_screen/login_screen.dart';
-import 'package:chat_app/ui/singup_screen.dart';
+import 'package:chat_app/features/singup/singup_screen.dart';
 import 'package:chat_app/utils/custom_button.dart';
 import 'package:flutter/material.dart';
 

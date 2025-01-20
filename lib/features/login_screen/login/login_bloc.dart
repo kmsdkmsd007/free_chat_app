@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:chat_app/features/login_screen/login/Login_states.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/utils/navigation.dart';
-import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'login_event.dart';
