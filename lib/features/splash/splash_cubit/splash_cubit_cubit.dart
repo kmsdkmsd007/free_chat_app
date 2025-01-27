@@ -11,17 +11,23 @@ class SplashCubitCubit extends Cubit<SplashCubitState> {
 
   checkAuthState() async {
     await Future.delayed(
-        const Duration(seconds: 2)); // Add a small delay for splash screen
+        const Duration(seconds: 4)); // Add a small delay for splash screen
     await Supabase.instance.client.auth.onAuthStateChange.listen((userState) {
       print(userState.session == null);
 
       if (userState.session == null) {
-        navigatorKey.currentState!.pushReplacementNamed(Routes.login);
-      } else {
-        if (userState.session!.user == null) {
+        if (navigatorKey.currentState != null) {
           navigatorKey.currentState!.pushReplacementNamed(Routes.login);
         } else {
+          // Handle the case when navigatorKey.currentState is null
+          print("Navigator key current state is null");
+        }
+      } else {
+        if (navigatorKey.currentState != null) {
           navigatorKey.currentState!.pushReplacementNamed(Routes.home);
+        } else {
+          // Handle the case when navigatorKey.currentState is null
+          print("Navigator key current state is null");
         }
       }
     });

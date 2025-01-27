@@ -1,11 +1,13 @@
 import 'package:chat_app/features/login_screen/login/Login_states.dart';
 import 'package:chat_app/features/login_screen/login/login_bloc.dart';
 import 'package:chat_app/features/login_screen/login/login_event.dart';
+import 'package:chat_app/main.dart';
 import 'package:chat_app/utils/custom_button.dart';
 import 'package:chat_app/utils/custom_text.dart';
 import 'package:chat_app/utils/custom_textformfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:chat_app/utils/navigation.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -163,6 +165,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.w400,
                               size: 18,
                             ),
+                            TextButton(
+                                onPressed: () {
+                                  navigatorKey.currentState!
+                                      .pushReplacementNamed(Routes.signUp);
+                                },
+                                child: Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                )),
                           ],
                         ),
                       ),

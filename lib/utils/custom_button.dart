@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends StatefulWidget {
   final String text;
   final VoidCallback onPressed;
   final Color textColor;
@@ -17,22 +17,24 @@ class CustomButton extends StatelessWidget {
       this.width = 150});
 
   @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-          color: backcolor, borderRadius: BorderRadius.circular(15)),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: backcolor,
-          foregroundColor: textColor,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
-        ),
-        onPressed: onPressed,
-        child: Text(text),
-      ),
+    return GestureDetector(
+      onTap: widget.onPressed,
+      child: Container(
+          height: widget.height,
+          width: widget.width,
+          decoration: BoxDecoration(
+              color: widget.backcolor, borderRadius: BorderRadius.circular(15)),
+          child: Center(
+              child: Text(
+            widget.text,
+            style: TextStyle(color: widget.textColor, fontSize: 22),
+          ))),
     );
   }
 }

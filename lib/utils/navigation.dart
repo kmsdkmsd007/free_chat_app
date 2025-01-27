@@ -21,7 +21,7 @@ class AppRouter {
       case Routes.signUp:
         return MaterialPageRoute(builder: (_) => SingupScreen());
       case Routes.home:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => ChatPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
