@@ -29,7 +29,9 @@ class SignUpInitial extends SignUpState {
 }
 
 class SignUpFailureState extends SignUpState {
-  SignUpFailureState({required this.error, required String message});
+  SignUpFailureState({
+    required this.error,
+  });
 
   final String error;
 

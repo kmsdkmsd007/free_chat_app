@@ -40,8 +40,8 @@ class _SingupScreenState extends State<SingupScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 12,
-        backgroundColor: Colors.white,
+        // toolbarHeight: 12,
+        backgroundColor: const Color.fromARGB(255, 232, 200, 200),
       ),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: BlocConsumer<SignUpCubit, SignUpState>(

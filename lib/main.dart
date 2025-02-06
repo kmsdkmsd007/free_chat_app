@@ -1,9 +1,7 @@
-import 'package:chat_app/features/home_screen.dart/home/home_cubit.dart';
-import 'package:chat_app/features/home_screen.dart/home_screen.dart';
-import 'package:chat_app/features/login_screen/login/login_bloc.dart';
+import 'package:chat_app/features/home/home/home_cubit.dart';
+import 'package:chat_app/features/login/login/login_bloc.dart';
 import 'package:chat_app/features/singup/cubit/signup_cubit.dart';
 import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
-import 'package:chat_app/features/splash/splash_screen.dart';
 import 'package:chat_app/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

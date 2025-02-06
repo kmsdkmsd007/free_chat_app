@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:chat_app/features/login_screen/login/Login_states.dart';
+import 'package:chat_app/features/login/login/Login_states.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/utils/navigation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -27,6 +27,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           }
         } catch (e) {
           emit(LoginFailureState(e.toString()));
+          Future.delayed(Duration(seconds: 7));
+          navigatorKey.currentState!.pushNamed(Routes.signUp);
         }
       }
     });

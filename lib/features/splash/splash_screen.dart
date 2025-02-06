@@ -122,7 +122,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     CustomButton(
                       text: "Register",
                       onPressed: () {
-                        // navigatorKey.currentState!.pushNamed(Routes.signUp);
+                        navigatorKey.currentState!.pushNamed(Routes.signUp);
                         print('object');
                       },
                       backcolor: const Color.fromARGB(255, 204, 189, 189),
