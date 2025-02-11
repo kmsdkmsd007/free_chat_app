@@ -1,5 +1,7 @@
 import 'package:chat_app/features/home/home/home_cubit.dart';
 import 'package:chat_app/features/login/login/login_bloc.dart';
+import 'package:chat_app/features/profile_info/cubit/image_cubit.dart';
+import 'package:chat_app/features/profile_info/prfile_screen.dart';
 import 'package:chat_app/features/singup/cubit/signup_cubit.dart';
 import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
 import 'package:chat_app/utils/navigation.dart';
@@ -21,6 +23,7 @@ void main() async {
       BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
       BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
       BlocProvider<SignUpCubit>(create: (context) => SignUpCubit()),
+      BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
     ],
     child: MyApp(),
   ));

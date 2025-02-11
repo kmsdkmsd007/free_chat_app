@@ -41,6 +41,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ChatPage extends StatelessWidget {
   final List<Map<String, String>> chats = [
@@ -142,7 +143,9 @@ class ChatPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.abc),
-            onPressed: () {
+            onPressed: () async {
+              await Supabase.instance.client.auth
+                  .signOut(scope: SignOutScope.global);
               // Add search functionality
             },
           ),

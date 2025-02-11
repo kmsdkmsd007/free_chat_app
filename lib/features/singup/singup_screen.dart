@@ -4,6 +4,7 @@ import 'package:chat_app/main.dart';
 import 'package:chat_app/utils/custom_button.dart';
 import 'package:chat_app/utils/custom_text.dart';
 import 'package:chat_app/utils/custom_textformfiled.dart';
+import 'package:chat_app/utils/meth_ext.dart';
 import 'package:chat_app/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,9 +17,9 @@ class SingupScreen extends StatefulWidget {
 }
 
 class _SingupScreenState extends State<SingupScreen> {
-  final emailContrioller = TextEditingController();
-  final passwardContrioller = TextEditingController();
-  final repasswardContrioller = TextEditingController();
+  final emailContrioller = TextEditingController(text: 'abcd');
+  final passwardContrioller = TextEditingController(text: '1234567');
+  final repasswardContrioller = TextEditingController(text: '1234567');
   final formKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -35,9 +36,6 @@ class _SingupScreenState extends State<SingupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         // toolbarHeight: 12,
@@ -45,10 +43,15 @@ class _SingupScreenState extends State<SingupScreen> {
       ),
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: BlocConsumer<SignUpCubit, SignUpState>(
-        listener: (context, state) {},
-        builder: (context, state) => state is SignUpFailureState
+        listener: (context, state) {
+          state is SignUpFailureState
+              ? ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.error)))
+              : null;
+        },
+        builder: (context, state) => state is SignUpLoadingState
             ? Center(
-                child: Text(state.error),
+                child: CircularProgressIndicator(),
               )
             : GestureDetector(
                 onTap: () {
@@ -62,8 +65,8 @@ class _SingupScreenState extends State<SingupScreen> {
                         children: [
                           Image.asset(
                             'assets/images/e2.png',
-                            height: screenHeight * .35,
-                            width: screenWidth * 0.94,
+                            height: context.height * .35,
+                            width: context.width * 0.94,
                           ),
                         ],
                       ),
@@ -72,8 +75,8 @@ class _SingupScreenState extends State<SingupScreen> {
                         children: [
                           Image.asset(
                             'assets/images/e1.png',
-                            width: screenWidth / 1.7,
-                            height: screenHeight / 3.13,
+                            width: context.width / 1.7,
+                            height: context.height / 3.13,
                           ),
                         ],
                       ),
@@ -82,14 +85,14 @@ class _SingupScreenState extends State<SingupScreen> {
                           key: formKey,
                           child: Column(
                             children: [
-                              SizedBox(height: screenHeight * .08),
+                              SizedBox(height: context.height * .08),
                               CustomText(
                                 text: "Create a new account",
                                 size: 35,
                                 fontWeight: FontWeight.bold,
                               ),
                               SizedBox(
-                                height: screenHeight * .009,
+                                height: context.height * .009,
                               ),
                               Center(
                                 child: CustomText(
@@ -101,7 +104,7 @@ class _SingupScreenState extends State<SingupScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: screenHeight * .04,
+                                height: context.height * .04,
                               ),
                               CustomTextFormField(
                                 hintText: "Email",
@@ -120,7 +123,7 @@ class _SingupScreenState extends State<SingupScreen> {
                                 },
                               ),
                               SizedBox(
-                                height: screenHeight / 70,
+                                height: context.height / 70,
                               ),
                               CustomTextFormField(
                                 hintText: "Passward",
@@ -151,7 +154,7 @@ class _SingupScreenState extends State<SingupScreen> {
                                 },
                               ),
                               SizedBox(
-                                height: screenHeight / 30,
+                                height: context.height / 30,
                               ),
                               CustomButton(
                                 text: "Register",
@@ -163,10 +166,10 @@ class _SingupScreenState extends State<SingupScreen> {
                                         passwardContrioller.text);
                                   }
                                 },
-                                width: screenHeight / 2.4,
+                                width: context.width / 2.4,
                               ),
                               SizedBox(
-                                height: screenHeight / 40,
+                                height: context.height / 40,
                               ),
                               CustomText(
                                 text: 'If you have already account',

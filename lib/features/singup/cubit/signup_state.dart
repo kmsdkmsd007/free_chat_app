@@ -2,14 +2,6 @@ import 'package:equatable/equatable.dart';
 
 abstract class SignUpState extends Equatable {}
 
-class RegisterNewUserState extends SignUpState {
-  final String email;
-  final String passward;
-  RegisterNewUserState({required this.email, required this.passward});
-  @override
-  List<Object?> get props => [passward, email];
-}
-
 class SignUpLoadingState extends SignUpState {
   @override
   List<Object?> get props => [];

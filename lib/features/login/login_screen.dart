@@ -5,6 +5,7 @@ import 'package:chat_app/main.dart';
 import 'package:chat_app/utils/custom_button.dart';
 import 'package:chat_app/utils/custom_text.dart';
 import 'package:chat_app/utils/custom_textformfiled.dart';
+import 'package:chat_app/utils/meth_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_app/utils/navigation.dart';
@@ -36,8 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     final bloc = context.read<LoginBloc>();
 
     return Scaffold(
@@ -69,8 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Image.asset(
                           'assets/images/e2.png',
-                          height: screenHeight * .35,
-                          width: screenWidth * 0.94,
+                          height: context.height * .35,
+                          width: context.width * 0.94,
                         ),
                       ],
                     ),
@@ -79,8 +78,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Image.asset(
                           'assets/images/e1.png',
-                          width: screenWidth / 1.7,
-                          height: screenHeight / 3.13,
+                          width: context.width / 1.7,
+                          height: context.height / 3.13,
                         ),
                       ],
                     ),
@@ -89,14 +88,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         key: formKey,
                         child: Column(
                           children: [
-                            SizedBox(height: screenHeight * .08),
+                            SizedBox(height: context.height * .08),
                             CustomText(
                               text: "Login here",
                               size: 35,
                               fontWeight: FontWeight.bold,
                             ),
                             SizedBox(
-                              height: screenHeight * .009,
+                              height: context.height * .009,
                             ),
                             Center(
                               child: CustomText(
@@ -107,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             SizedBox(
-                              height: screenHeight * .04,
+                              height: context.height * .04,
                             ),
                             CustomTextFormField(
                               hintText: "Email",
@@ -126,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                             SizedBox(
-                              height: screenHeight / 70,
+                              height: context.height / 70,
                             ),
                             CustomTextFormField(
                               hintText: "Passward",
@@ -143,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                             SizedBox(
-                              height: screenHeight / 30,
+                              height: context.height / 30,
                             ),
                             CustomButton(
                               text: "Login",
@@ -154,10 +153,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       passwoed: passwardContrioller.text));
                                 }
                               },
-                              width: screenHeight / 2.4,
+                              width: context.width / 2.4,
                             ),
                             SizedBox(
-                              height: screenHeight / 30,
+                              height: context.height / 30,
                             ),
                             CustomText(
                               text: 'Create a new account',
