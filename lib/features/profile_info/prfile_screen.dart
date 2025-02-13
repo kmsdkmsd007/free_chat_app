@@ -1,13 +1,11 @@
-import 'package:chat_app/features/profile_info/cubit/image_cubit.dart';
-import 'package:chat_app/utils/custom_textformfiled.dart';
-import 'package:chat_app/utils/meth_ext.dart';
+import 'package:chat_app/features/user_info/user_info%20cubit/userInfo_cubit.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
-  TextEditingController c = TextEditingController();
+  final TextEditingController c = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

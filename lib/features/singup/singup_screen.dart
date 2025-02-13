@@ -1,5 +1,5 @@
-import 'package:chat_app/features/singup/cubit/signup_cubit.dart';
-import 'package:chat_app/features/singup/cubit/signup_state.dart';
+import 'package:chat_app/features/singup/sign_Up%20cubit/signup_cubit.dart';
+import 'package:chat_app/features/singup/sign_Up%20cubit/signup_state.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/utils/custom_button.dart';
 import 'package:chat_app/utils/custom_text.dart';
