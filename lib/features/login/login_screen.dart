@@ -1,6 +1,6 @@
-import 'package:chat_app/features/login/login_cubit/Login_states.dart';
-import 'package:chat_app/features/login/login_cubit/login_bloc.dart';
-import 'package:chat_app/features/login/login_cubit/login_event.dart';
+import 'package:chat_app/features/login/login_bloc/Login_states.dart';
+import 'package:chat_app/features/login/login_bloc/login_bloc.dart';
+import 'package:chat_app/features/login/login_bloc/login_event.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/utils/custom_button.dart';
 import 'package:chat_app/utils/custom_text.dart';
@@ -18,9 +18,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailContrioller = TextEditingController();
-  final passwardContrioller = TextEditingController();
-  final repasswardContrioller = TextEditingController();
+  // final emailContrioller = TextEditingController(text: "qer@ty.com");
+  final emailContrioller = TextEditingController(text: "iii@i.com");
+  final passwardContrioller = TextEditingController(text: "11223344");
+  final repasswardContrioller = TextEditingController(text: "11223344");
   final formKey = GlobalKey<FormState>();
   @override
   void initState() {

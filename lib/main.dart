@@ -1,5 +1,9 @@
-import 'package:chat_app/features/home/home/home_cubit.dart';
-import 'package:chat_app/features/login/login_cubit/login_bloc.dart';
+import 'package:chat_app/features/chat_screen.dart/chat_screen.dart';
+import 'package:chat_app/features/chat_screen.dart/cubit/chat_cubit.dart';
+import 'package:chat_app/features/contact_user/contact_user%20bloc/contact_user_bloc.dart';
+import 'package:chat_app/features/conversation/conversation_screen.dart';
+import 'package:chat_app/features/conversation/cubit/conversation_cubit.dart';
+import 'package:chat_app/features/login/login_bloc/login_bloc.dart';
 import 'package:chat_app/features/user_info/user_info%20cubit/userInfo_cubit.dart';
 import 'package:chat_app/features/singup/sign_Up%20cubit/signup_cubit.dart';
 import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
@@ -19,8 +23,12 @@ void main() async {
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<SplashCubitCubit>(create: (context) => SplashCubitCubit()),
-      BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
+      BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
+      BlocProvider<ContactUserBloc>(
+          create: (context) =>
+              ContactUserBloc(Supabase.instance.client)..add(FetchUserEvent())),
       BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
+      BlocProvider<ConversationCubit>(create: (context) => ConversationCubit()),
       BlocProvider<SignUpCubit>(create: (context) => SignUpCubit()),
       BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
     ],
@@ -34,10 +42,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // home: ConversationScreen(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: Routes.splash, // Change
+      initialRoute: Routes.splash,
     );
   }
 }

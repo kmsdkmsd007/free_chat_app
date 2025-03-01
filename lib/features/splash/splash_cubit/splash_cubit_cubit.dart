@@ -18,7 +18,7 @@ class SplashCubitCubit extends Cubit<SplashCubitState> {
       } else {
         userState.session!.user.userMetadata!['name'] == null
             ? navigatorKey.currentState!.pushReplacementNamed(Routes.profile)
-            : navigatorKey.currentState!.pushReplacementNamed(Routes.home);
+            : navigatorKey.currentState!.pushReplacementNamed(Routes.chats);
       }
     });
   }

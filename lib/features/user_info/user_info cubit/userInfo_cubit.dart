@@ -48,7 +48,6 @@ class ImageCubit extends Cubit<ImageState> {
           .getPublicUrl(photoLocalPath.split('/').last);
       return publicUrl;
     } catch (e) {
-      print(e.toString());
       throw Exception('Faild to upload photo: $e');
     }
   }
@@ -56,25 +55,24 @@ class ImageCubit extends Cubit<ImageState> {
   Future<void> profileUpdate(String name, String profilePic) async {
     try {
       var link = await uploadPHotoAndGetLink(profilePic);
-      // await Supabase.instance.client.from("profiles").insert({
-      //   "id": Supabase.instance.client.auth.currentUser!.id,
-      //   'email': Supabase.instance.client.auth.currentUser!.email,
-      //   'name': name,
-      //   'profile_picture': link,
-      // });
+
       var metadata = {
-        'name': name,
+        'user_id': Supabase.instance.client.auth.currentUser!.id,
+        'username': name,
+        "email": Supabase.instance.client.auth.currentUser!.email,
+        'last_login': DateTime.now().toString(),
+        'is_active': true,
         'profile_picture': link,
       };
-      await Supabase.instance.client.auth
-          .updateUser(UserAttributes(data: metadata));
-      ScaffoldMessenger.of(navigatorKey.currentContext!)
-          .showSnackBar(SnackBar(content: Text("Sorry there was an error")));
-      navigatorKey.currentState!.pushReplacementNamed(Routes.home);
+      await Supabase.instance.client.from('user').upsert(
+            metadata,
+            ignoreDuplicates: false,
+          );
+
+      navigatorKey.currentState!.pushReplacementNamed(Routes.chats);
     } catch (e) {
       ScaffoldMessenger.of(navigatorKey.currentContext!)
           .showSnackBar(SnackBar(content: Text("Sorry there was an error")));
-      print(e.toString());
     }
   }
 }
