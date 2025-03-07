@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:chat_app/features/chat_screen.dart/conversation_model.dart';
+import 'package:chat_app/features/chat/chat_model.dart';
+import 'package:chat_app/features/conversation/conversation_model.dart';
+import 'package:chat_app/utils/const_Strings.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -9,11 +11,11 @@ class ConversationCubit extends Cubit<ConversationState> {
   final SupabaseClient _supabaseClient = Supabase.instance.client;
   ConversationCubit() : super(ConversationInitial());
 
-  insertChatModel() async {
+  insertChatModel(String? name, bool isGroup) async {
     try {
       await _supabaseClient.from('chats').insert({
-        'user_one': _supabaseClient.auth.currentUser!.id,
-        'user_two': _supabaseClient.auth.currentUser!.id,
+        'name': name,
+        'is_grouped': isGroup,
         'timestamp': DateTime.now().toString(),
       });
     } catch (e) {
@@ -21,13 +23,39 @@ class ConversationCubit extends Cubit<ConversationState> {
     }
   }
 
-  insertConversation(ConversationModel conversationModel) async {
+  Future<int> insertOrUpdateChatTable() async {
+    var a = await Supabase.instance.client
+        .from(C.t_chats)
+        .insert(createChatModel().toJson())
+        .select('id');
+    return a.first['id'];
+  }
+
+  Future<void> insertUserToChat(String userId, int chatId) async =>
+      await Supabase.instance.client
+          .from(C.t_chat_member)
+          .insert({'chat_id': chatId, "user_id": userId});
+
+  insertConversation(
+      ConversationModel conversationModel, String receiverId) async {
     emit(ConversationLoading());
     try {
-      await _supabaseClient
-          .from('converstations')
-          .insert(conversationModel.toJson());
+      int chatId = await insertOrUpdateChatTable();
+      print(chatId);
+      await insertUserToChat(receiverId, chatId);
+      await insertUserToChat(
+          Supabase.instance.client.auth.currentUser!.id, chatId);
+
+      await _supabaseClient.from(C.t_messages).insert(conversationModel
+          .copyWith(
+            chatId: chatId,
+            content: "112233",
+            contentType: "1",
+            senderId: Supabase.instance.client.auth.currentUser!.id,
+          )
+          .toJson());
     } catch (e) {
+      print(e.toString());
       emit(ConversationError(errorMessage: e.toString()));
     }
   }

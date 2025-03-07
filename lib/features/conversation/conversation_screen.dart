@@ -1,45 +1,100 @@
 import 'package:chat_app/features/contact_user/contact_user%20bloc/contact_user_bloc.dart';
+import 'package:chat_app/features/conversation/conversation_model.dart';
 import 'package:chat_app/features/conversation/cubit/conversation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ConversationScreen extends StatelessWidget {
-  const ConversationScreen({super.key, required this.username});
+  ConversationScreen({super.key, required this.username, required this.userId});
   final String username;
-
+  final String userId;
+  final _msessagecontroler = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(username),
       ),
-      body: BlocBuilder<ConversationCubit, ConversationState>(
-        builder: (context, state) {
-          if (state is ContactUserLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is ConversationLoading) {
-            return Center(
-              child: Text('Something went wrong'),
-            );
-          }
-          if (state is ConversationSuccess) {
-            return ListView.builder(
-              itemCount: state.conversations.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    radius: 25,
-                    backgroundImage: AssetImage("assets/images/well.png"),
-                  ),
+      body: Column(
+        children: [
+          BlocBuilder<ConversationCubit, ConversationState>(
+            builder: (context, state) {
+              if (state is ContactUserLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
                 );
-              },
-            );
-          }
-          return Container();
-        },
+              }
+              if (state is ConversationLoading) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (state is ConversationSuccess) {
+                return ListView.builder(
+                  itemCount: state.conversations.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: Text(state.conversations[index].content),
+                      title: Text(
+                          state.conversations[index].contentType.toString()),
+                    );
+                  },
+                );
+              }
+              return Container();
+            },
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset: Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.attachment),
+                      onPressed: () {
+                        // Implement file select functionality
+                      },
+                    ),
+                    Expanded(
+                      child: TextField(
+                        controller: _msessagecontroler,
+                        decoration: InputDecoration(
+                          hintText: "Type a message",
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.send),
+                      onPressed: () {
+                        context.read<ConversationCubit>().insertConversation(
+                            createConversationModel(
+                                senderId: '',
+                                contentType: "1",
+                                content: _msessagecontroler.text),
+                            userId);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

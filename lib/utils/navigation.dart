@@ -1,7 +1,7 @@
-import 'package:chat_app/features/chat_screen.dart/chat_screen.dart';
-import 'package:chat_app/features/contact_user/contactuser_screen.dart';
+import 'package:chat_app/features/chat/chat_screen.dart';
+import 'package:chat_app/features/contact_user/contact_user_screen.dart';
 import 'package:chat_app/features/conversation/conversation_screen.dart';
-import 'package:chat_app/features/user_info/userInfo_screen.dart';
+import 'package:chat_app/features/pick_image/pick_image_screen.dart';
 import 'package:chat_app/features/splash/splash_screen.dart';
 import 'package:chat_app/features/login/login_screen.dart';
 import 'package:chat_app/features/singup/singup_screen.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class Routes {
   static const String login = '/login';
   static const String chats = '/chats';
-  static const String conversation = '/conve';
+  static const String conversation = '/conversation';
   static const String splash = '/splash';
   static const String signUp = '/signup';
   static const String profile = '/profile';
@@ -31,16 +31,17 @@ class AppRouter {
       case Routes.chats:
         return MaterialPageRoute(builder: (_) => ChatsScreen());
       case Routes.profile:
-        return MaterialPageRoute(builder: (_) => UserInfoScreen());
+        return MaterialPageRoute(builder: (_) => PickImageScreen());
       case Routes.conversation:
         return MaterialPageRoute(
             builder: (_) => ConversationScreen(
-                  username: settings.arguments as String,
+                  username: (settings.arguments as Map)['name'],
+                  userId: (settings.arguments as Map)['userId'],
                 ));
 
       default:
         return MaterialPageRoute(
-          builder: (_) => SplashScreen(),
+          builder: (_) => LoginScreen(),
         );
     }
   }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:chat_app/features/contact_user/cmodel.dart';
 import 'package:equatable/equatable.dart';

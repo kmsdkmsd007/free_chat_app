@@ -1,10 +1,8 @@
-import 'package:chat_app/features/chat_screen.dart/chat_screen.dart';
-import 'package:chat_app/features/chat_screen.dart/cubit/chat_cubit.dart';
+import 'package:chat_app/features/chat/cubit/chat_cubit.dart';
 import 'package:chat_app/features/contact_user/contact_user%20bloc/contact_user_bloc.dart';
-import 'package:chat_app/features/conversation/conversation_screen.dart';
 import 'package:chat_app/features/conversation/cubit/conversation_cubit.dart';
 import 'package:chat_app/features/login/login_bloc/login_bloc.dart';
-import 'package:chat_app/features/user_info/user_info%20cubit/userInfo_cubit.dart';
+import 'package:chat_app/features/pick_image/pick_image_cubit/userInfo_cubit.dart';
 import 'package:chat_app/features/singup/sign_Up%20cubit/signup_cubit.dart';
 import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
 import 'package:chat_app/utils/navigation.dart';
