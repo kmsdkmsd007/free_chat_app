@@ -16,8 +16,8 @@ class ContactUserBloc extends Bloc<ContactUserEvent, ContactUserState> {
     try {
       final response = await supabaseClient.from('user').select();
       if (response.isNotEmpty) {
-        emit(ContactUserLoaded(
-            response.map((u) => MyUser.fromJson(u)).toList()));
+        final users = response.map((u) => MyUser.fromJson(u)).toList();
+        emit(ContactUserLoaded(users));
       }
     } catch (e) {
       emit(ContactUserError(e.toString()));

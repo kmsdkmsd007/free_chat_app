@@ -31,10 +31,12 @@ class ConversationCubit extends Cubit<ConversationState> {
     return a.first['id'];
   }
 
-  Future<void> insertUserToChat(String userId, int chatId) async =>
-      await Supabase.instance.client
-          .from(C.t_chat_member)
-          .insert({'chat_id': chatId, "user_id": userId});
+  Future<void> insertUserToChat(String userId, int chatId) async {
+    await Supabase.instance.client
+        .from(C.t_chat_member)
+        .insert({'chat_id': chatId, "user_id": userId});
+    print(userId);
+  }
 
   insertConversation(
       ConversationModel conversationModel, String receiverId) async {
@@ -49,9 +51,10 @@ class ConversationCubit extends Cubit<ConversationState> {
       await _supabaseClient.from(C.t_messages).insert(conversationModel
           .copyWith(
             chatId: chatId,
-            content: "112233",
-            contentType: "1",
+            content: " u Usman",
+            contentType: "211",
             senderId: Supabase.instance.client.auth.currentUser!.id,
+            // Update the receiverId in the conversation model
           )
           .toJson());
     } catch (e) {

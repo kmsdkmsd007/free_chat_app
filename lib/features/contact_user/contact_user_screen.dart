@@ -16,7 +16,7 @@ class ContactuserScreen extends StatelessWidget {
       body: BlocBuilder<ContactUserBloc, ContactUserState>(
           builder: (context, state) {
         return state is ContactUserLoading
-            ? CircularProgressIndicator()
+            ? Center(child: CircularProgressIndicator())
             : state is ContactUserError
                 ? Center(
                     child: Text('Something went wrong'),
@@ -46,6 +46,7 @@ class ContactuserScreen extends StatelessWidget {
                             child: ListView.builder(
                               itemCount: state.users.length,
                               itemBuilder: (context, index) {
+                                print(state.users.length.toString());
                                 return Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10, right: 10, top: 25),

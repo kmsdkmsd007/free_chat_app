@@ -54,14 +54,15 @@ class _ChatsScreenState extends State<ChatsScreen> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
-                              child: ClipOval(
-                                child: Image.network(
-                                  state.chats[index].name ?? "",
-                                  fit: BoxFit.cover,
-                                  width: 60,
-                                  height: 60,
-                                ),
-                              ),
+                              child: Text(state.chats[index].name ?? ""),
+                              // ClipOval(
+                              //   child: Image.network(
+
+                              //     fit: BoxFit.cover,
+                              //     width: 60,
+                              //     height: 60,
+                              //   ),
+                              // ),
                             ),
                             title: Text(state.chats[index].name ?? "",
                                 style: TextStyle(fontWeight: FontWeight.bold)),

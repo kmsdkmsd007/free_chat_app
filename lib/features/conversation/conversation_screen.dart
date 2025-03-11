@@ -3,7 +3,6 @@ import 'package:chat_app/features/conversation/conversation_model.dart';
 import 'package:chat_app/features/conversation/cubit/conversation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ConversationScreen extends StatelessWidget {
   ConversationScreen({super.key, required this.username, required this.userId});
