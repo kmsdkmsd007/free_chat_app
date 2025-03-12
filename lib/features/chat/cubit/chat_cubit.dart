@@ -20,6 +20,7 @@ class ChatCubit extends Cubit<ChatState> {
       }
     } catch (e) {
       print(e.toString());
+      emit(ChatFailure(errorMessage: e.toString()));
     }
   }
 }

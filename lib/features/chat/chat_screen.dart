@@ -28,13 +28,18 @@ class _ChatsScreenState extends State<ChatsScreen> {
           'Chats',
           style: TextStyle(fontSize: 27, fontWeight: FontWeight.w400),
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.abc),
+            icon: Icon(Icons.logout),
             onPressed: () async {
               await Supabase.instance.client.auth
                   .signOut(scope: SignOutScope.global);
-              // Add search functionality
             },
           ),
         ],
@@ -55,23 +60,10 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                 shape: BoxShape.circle,
                               ),
                               child: Text(state.chats[index].name ?? ""),
-                              // ClipOval(
-                              //   child: Image.network(
-
-                              //     fit: BoxFit.cover,
-                              //     width: 60,
-                              //     height: 60,
-                              //   ),
-                              // ),
                             ),
                             title: Text(state.chats[index].name ?? "",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            // subtitle: Text(chats[index]["message"]!),
-                            // trailing: Text(
-                            //   chats[index]["time"]!,
-                            //   style:
-                            //       TextStyle(color: Colors.black, fontSize: 12),
-                            // ),
+                            trailing: Text(""),
                             onTap: () {
                               // Handle chat click
                             },

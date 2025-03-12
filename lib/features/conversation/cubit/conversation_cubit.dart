@@ -51,8 +51,8 @@ class ConversationCubit extends Cubit<ConversationState> {
       await _supabaseClient.from(C.t_messages).insert(conversationModel
           .copyWith(
             chatId: chatId,
-            content: " u Usman",
-            contentType: "211",
+            content: " how are u kashif ",
+            contentType: "2211",
             senderId: Supabase.instance.client.auth.currentUser!.id,
             // Update the receiverId in the conversation model
           )
