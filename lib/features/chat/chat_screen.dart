@@ -59,9 +59,10 @@ class _ChatsScreenState extends State<ChatsScreen> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
-                              child: Text(state.chats[index].name ?? ""),
+                              child:
+                                  Text(state.chats[index].createdAt.toString()),
                             ),
-                            title: Text(state.chats[index].name ?? "",
+                            title: Text(state.chats[index].name ?? "no name ",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             trailing: Text(""),
                             onTap: () {
