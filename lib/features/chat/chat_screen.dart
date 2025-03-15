@@ -66,7 +66,8 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             trailing: Text(""),
                             onTap: () {
-                              // Handle chat click
+                              navigatorKey.currentState!
+                                  .pushReplacementNamed('/conversation');
                             },
                           ),
                         );

@@ -11,8 +11,13 @@ class ChatCubit extends Cubit<ChatState> {
   getAllChats() async {
     emit(ChatLoading());
     try {
-      final response =
-          await Supabase.instance.client.from("chat_member").select();
+      final userId = Supabase.instance.client.auth.currentUser!.id;
+
+      final response = await Supabase.instance.client
+          .from("chat_member")
+          .select(
+              'chat_id, chats(*), user:user(username, email, profile_picture)')
+          .eq('user_id', userId);
 
       if (response.isNotEmpty) {
         emit(ChatSuccess(chats: response.map((e) => e.toChatModel()).toList()));
