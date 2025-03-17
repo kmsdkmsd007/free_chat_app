@@ -1,4 +1,5 @@
 import 'package:chat_app/features/chat/cubit/chat_cubit.dart';
+import 'package:chat_app/features/contact_user/cmodel.dart';
 import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ class ChatsScreen extends StatefulWidget {
 }
 
 class _ChatsScreenState extends State<ChatsScreen> {
+  final List<MyUser> chat = [];
   late ChatCubit chatCubit;
   @override
   void initState() {
