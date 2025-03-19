@@ -55,7 +55,8 @@ class ContactuserScreen extends StatelessWidget {
                                       Navigator.of(context).pushNamed(
                                           Routes.conversation,
                                           arguments: {
-                                            'userId': state.users[index].userId,
+                                            'user_Id':
+                                                state.users[index].userId,
                                             'name': state.users[index].username
                                           });
                                     },
