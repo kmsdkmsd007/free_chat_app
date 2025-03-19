@@ -1,6 +1,9 @@
-
+.flutter-plugins-dependencies
 .dart_tool/package_config.json
 .flutter-plugins-dependencies
 /build
 /windows
 /linux
+.metadata
+.flutter-plugins
+.idea
