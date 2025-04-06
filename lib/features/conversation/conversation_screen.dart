@@ -80,6 +80,10 @@ class ConversationScreen extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.send),
                       onPressed: () {
+                        // context
+                        //     .read<ConversationCubit>()
+                        //     .findCommonChat(userId);
+                        // print('hi');
                         context.read<ConversationCubit>().insertConversation(
                             createConversationModel(
                                 senderId: '',

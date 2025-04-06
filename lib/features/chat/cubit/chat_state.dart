@@ -12,7 +12,7 @@ final class ChatInitial extends ChatState {}
 final class ChatLoading extends ChatState {}
 
 final class ChatSuccess extends ChatState {
-  final List<ChatModel> chats;
+  final List<UserChatModel> chats;
 
   const ChatSuccess({required this.chats});
 }

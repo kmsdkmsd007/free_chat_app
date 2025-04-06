@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:chat_app/features/contact_user/cmodel.dart';
+import 'package:chat_app/utils/const_Strings.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -14,7 +15,11 @@ class ContactUserBloc extends Bloc<ContactUserEvent, ContactUserState> {
   }
   Future<void> fetchUsers() async {
     try {
-      final response = await supabaseClient.from('user').select();
+      final loggedInUserId = supabaseClient.auth.currentUser?.id;
+      final response = await supabaseClient
+          .from('user')
+          .select()
+          .neq(C.t_user_id, loggedInUserId ?? "");
       if (response.isNotEmpty) {
         final users = response.map((u) => MyUser.fromJson(u)).toList();
         emit(ContactUserLoaded(users));

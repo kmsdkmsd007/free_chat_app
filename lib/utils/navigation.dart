@@ -36,7 +36,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => ConversationScreen(
                   username: (settings.arguments as Map)['name'],
-                  userId: (settings.arguments as Map)['userId'],
+                  userId: (settings.arguments as Map)['user_Id'],
                 ));
 
       default:

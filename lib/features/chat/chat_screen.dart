@@ -1,6 +1,7 @@
 import 'package:chat_app/features/chat/cubit/chat_cubit.dart';
 import 'package:chat_app/features/contact_user/cmodel.dart';
 import 'package:chat_app/main.dart';
+import 'package:chat_app/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -61,10 +62,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
-                              child:
-                                  Text(state.chats[index].createdAt.toString()),
+                              child: Text(
+                                  state.chats[index].messageTime.toString()),
                             ),
-                            title: Text(state.chats[index].name ?? "no name ",
+                            title: Text(
+                                state.chats[index].username ?? "no name ",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             trailing: Text(""),
                             onTap: () {
@@ -80,7 +82,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          navigatorKey.currentState!.pushReplacementNamed('/contact');
+          navigatorKey.currentState!.pushReplacementNamed(Routes.contact);
         },
         backgroundColor: Colors.teal,
         child: Icon(Icons.add),
