@@ -58,17 +58,34 @@ class _ChatsScreenState extends State<ChatsScreen> {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ListTile(
-                            leading: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Text(
-                                  state.chats[index].messageTime.toString()),
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  state.chats[index].profilePicture!.isNotEmpty
+                                      ? NetworkImage(
+                                          state.chats[index].profilePicture!)
+                                      : null,
+                              backgroundColor: Colors.teal,
+                              child: state.chats[index].profilePicture!.isEmpty
+                                  ? Text(
+                                      state.chats[index].username![0]
+                                          .toUpperCase(),
+                                      style: TextStyle(color: Colors.white),
+                                    )
+                                  : null,
+                            ),
+                            subtitle: Text(
+                              state.chats[index].lastMessage ?? "no message",
+                              style: TextStyle(color: Colors.black54),
                             ),
                             title: Text(
                                 state.chats[index].username ?? "no name ",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            trailing: Text(""),
+                            trailing: Text(
+                              state.chats[index].messageTime != null
+                                  ? "${state.chats[index].messageTime.hour}:${state.chats[index].messageTime.minute}"
+                                  : "no time",
+                              style: TextStyle(color: Colors.black54),
+                            ),
                             onTap: () {
                               navigatorKey.currentState!
                                   .pushReplacementNamed('/conversation');
