@@ -77,4 +77,21 @@ class ConversationCubit extends Cubit<ConversationState> {
       emit(ConversationError(errorMessage: e.toString()));
     }
   }
+
+  sendMessage(
+    ConversationModel conversationModel,
+  ) async {
+    emit(ConversationLoading());
+    try {
+      await _supabaseClient.from(C.t_messages).insert(conversationModel
+          .copyWith(
+            chatId: conversationModel.chatId,
+            senderId: Supabase.instance.client.auth.currentUser!.id,
+          )
+          .toJson());
+    } catch (e) {
+      print(e.toString());
+      emit(ConversationError(errorMessage: e.toString()));
+    }
+  }
 }

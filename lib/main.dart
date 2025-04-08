@@ -3,6 +3,7 @@ import 'package:chat_app/features/contact_user/contact_user%20bloc/contact_user_
 import 'package:chat_app/features/contact_user/contact_user_screen.dart';
 import 'package:chat_app/features/conversation/cubit/conversation_cubit.dart';
 import 'package:chat_app/features/login/login_bloc/login_bloc.dart';
+import 'package:chat_app/features/messages/message_cubit/message_cubit.dart';
 import 'package:chat_app/features/pick_image/pick_image_cubit/userInfo_cubit.dart';
 import 'package:chat_app/features/singup/sign_Up%20cubit/signup_cubit.dart';
 import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
@@ -22,6 +23,7 @@ void main() async {
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<SplashCubitCubit>(create: (context) => SplashCubitCubit()),
+      BlocProvider<MessageCubit>(create: (context) => MessageCubit()),
       BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
       BlocProvider<ContactUserBloc>(
           create: (context) =>

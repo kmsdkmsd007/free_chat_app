@@ -26,16 +26,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.teal,
         title: Text(
           'Chats',
           style: TextStyle(fontSize: 27, fontWeight: FontWeight.w400),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
         actions: [
           IconButton(
@@ -65,7 +60,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                           state.chats[index].profilePicture!)
                                       : null,
                               backgroundColor: Colors.teal,
-                              child: state.chats[index].profilePicture!.isEmpty
+                              child: state.chats[index].profilePicture.isEmpty
                                   ? Text(
                                       state.chats[index].username![0]
                                           .toUpperCase(),
@@ -74,21 +69,23 @@ class _ChatsScreenState extends State<ChatsScreen> {
                                   : null,
                             ),
                             subtitle: Text(
-                              state.chats[index].lastMessage ?? "no message",
+                              state.chats[index].lastMessage,
                               style: TextStyle(color: Colors.black54),
                             ),
-                            title: Text(
-                                state.chats[index].username ?? "no name ",
+                            title: Text(state.chats[index].username,
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             trailing: Text(
-                              state.chats[index].messageTime != null
-                                  ? "${state.chats[index].messageTime.hour}:${state.chats[index].messageTime.minute}"
-                                  : "no time",
+                              "${state.chats[index].messageTime.hour}:${state.chats[index].messageTime.minute}",
                               style: TextStyle(color: Colors.black54),
                             ),
                             onTap: () {
                               navigatorKey.currentState!
-                                  .pushReplacementNamed('/conversation');
+                                  .pushNamed(Routes.messageScreen, arguments: {
+                                'chat_id': state.chats[index].chatId,
+                                'my_id': Supabase
+                                    .instance.client.auth.currentUser!.id
+                              });
+                              // navigatorKey.currentState!.pushReplacementNamed(
                             },
                           ),
                         );

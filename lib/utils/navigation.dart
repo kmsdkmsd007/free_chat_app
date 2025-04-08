@@ -1,6 +1,7 @@
 import 'package:chat_app/features/chat/chat_screen.dart';
 import 'package:chat_app/features/contact_user/contact_user_screen.dart';
 import 'package:chat_app/features/conversation/conversation_screen.dart';
+import 'package:chat_app/features/messages/message_screen.dart';
 import 'package:chat_app/features/pick_image/pick_image_screen.dart';
 import 'package:chat_app/features/splash/splash_screen.dart';
 import 'package:chat_app/features/login/login_screen.dart';
@@ -11,6 +12,7 @@ class Routes {
   static const String login = '/login';
   static const String chats = '/chats';
   static const String conversation = '/conversation';
+  static const String messageScreen = '/message_screen';
   static const String splash = '/splash';
   static const String signUp = '/signup';
   static const String profile = '/profile';
@@ -22,6 +24,14 @@ class AppRouter {
     switch (settings.name) {
       case Routes.splash:
         return MaterialPageRoute(builder: (_) => SplashScreen());
+      case Routes.messageScreen:
+        return MaterialPageRoute(
+            builder: (_) => MessageScreen(
+                chatId: (settings.arguments as Map<String, dynamic>)['chat_id']
+                    as int,
+                myId: (settings.arguments as Map<String, dynamic>)['my_id']
+                    as String));
+
       case Routes.login:
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case Routes.contact:
