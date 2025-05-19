@@ -12,17 +12,13 @@ class SplashCubitCubit extends Cubit<SplashCubitState> {
   checkAuthState() async {
     await Future.delayed(
         const Duration(seconds: 2)); // Add a small delay for splash screen
-    await Supabase.instance.client.auth.onAuthStateChange.listen((userState) {
-      print(userState.session == null);
-
+    Supabase.instance.client.auth.onAuthStateChange.listen((userState) {
       if (userState.session == null) {
         navigatorKey.currentState!.pushReplacementNamed(Routes.login);
       } else {
-        if (userState.session!.user == null) {
-          navigatorKey.currentState!.pushReplacementNamed(Routes.login);
-        } else {
-          navigatorKey.currentState!.pushReplacementNamed(Routes.home);
-        }
+        userState.session!.user.userMetadata!['name'] == null
+            ? navigatorKey.currentState!.pushReplacementNamed(Routes.profile)
+            : navigatorKey.currentState!.pushReplacementNamed(Routes.chats);
       }
     });
   }

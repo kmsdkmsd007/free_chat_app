@@ -1,8 +1,12 @@
-import 'package:chat_app/features/home_screen.dart/home/home_cubit.dart';
-import 'package:chat_app/features/login_screen/login/login_bloc.dart';
+import 'package:chat_app/features/chat/cubit/chat_cubit.dart';
+import 'package:chat_app/features/contact_user/contact_user%20bloc/contact_user_bloc.dart';
+import 'package:chat_app/features/contact_user/contact_user_screen.dart';
+import 'package:chat_app/features/conversation/cubit/conversation_cubit.dart';
+import 'package:chat_app/features/login/login_bloc/login_bloc.dart';
+import 'package:chat_app/features/messages/message_cubit/message_cubit.dart';
+import 'package:chat_app/features/pick_image/pick_image_cubit/userInfo_cubit.dart';
+import 'package:chat_app/features/singup/sign_Up%20cubit/signup_cubit.dart';
 import 'package:chat_app/features/splash/splash_cubit/splash_cubit_cubit.dart';
-import 'package:chat_app/features/splash/splash_screen.dart';
-import 'package:chat_app/ui/welcome_screen.dart';
 import 'package:chat_app/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,8 +23,15 @@ void main() async {
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<SplashCubitCubit>(create: (context) => SplashCubitCubit()),
-      BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
+      BlocProvider<MessageCubit>(create: (context) => MessageCubit()),
+      BlocProvider<ChatCubit>(create: (context) => ChatCubit()),
+      BlocProvider<ContactUserBloc>(
+          create: (context) =>
+              ContactUserBloc(Supabase.instance.client)..add(FetchUserEvent())),
       BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
+      BlocProvider<ConversationCubit>(create: (context) => ConversationCubit()),
+      BlocProvider<SignUpCubit>(create: (context) => SignUpCubit()),
+      BlocProvider<ImageCubit>(create: (context) => ImageCubit()),
     ],
     child: MyApp(),
   ));
@@ -32,10 +43,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // home: ContactuserScreen(),
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: Routes.splash, // Change
+      initialRoute: Routes.splash,
     );
   }
 }
